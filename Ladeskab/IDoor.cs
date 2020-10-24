@@ -6,8 +6,10 @@ namespace Ladeskab
 {
     public interface IDoor
     {
-        void UnlockDoor();
+        void lockedDoor();
 
-        void LockDoor();
+        void unlockedDoor();
+
+        bool DoorLocked { get; }
     }
 }
