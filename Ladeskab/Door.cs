@@ -4,8 +4,14 @@ using System.Text;
 
 namespace Ladeskab
 {
-    public class Door: IDoor
+    public interface Door: IDoor
     {
+        void lockedDoor();
 
+        void unlockedDoor();
+
+        bool DoorLocked { get; }
+        
+        //dede
     }
 }
