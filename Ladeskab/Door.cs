@@ -13,5 +13,6 @@ namespace Ladeskab
         bool DoorLocked { get; }
         
         //dede
+
     }
 }
