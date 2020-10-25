@@ -8,7 +8,10 @@ namespace Ladeskab
     {
         public void RfidDetected(int id)
         {
-            this.Rfid = true;
+
+            string idString = System.Console.ReadLine();
+            _ = Convert.ToInt32(idString);  
+
         }
 
         public event EventHandler<RfidEventArgs> RfidEvent;
