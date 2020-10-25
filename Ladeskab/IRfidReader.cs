@@ -11,13 +11,11 @@ namespace Ladeskab
     }
 
 
-
     public interface IRfidReader
     {
-        void RfidDetected(id);
+        void RfidDetected(int id);
 
-        event EventHandler<RfidEventsArgs> RfidEvent;
+        event EventHandler<RfidEventArgs> RfidEvent;
 
-        protected virtual void RfidDetectedEvent(doorOpenEventArgs);
     }
 }
