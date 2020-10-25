@@ -10,7 +10,7 @@ namespace Ladeskab
         {
 
             string idString = System.Console.ReadLine();
-            _ = Convert.ToInt32(idString);  
+            int id = Convert.ToInt32(idString);  
 
         }
 
