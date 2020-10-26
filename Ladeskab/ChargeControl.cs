@@ -1,21 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ladeskab.UsbSimulator;
 
 namespace Ladeskab
 {
     public class ChargeControl: IChargeControl
     {
-        public bool IsConnected { get; set; }
+        private IUsbCharger _usbCharger;
+        private IDisplay _display;
+
+        public bool IsConnected()
+        {
+            return _usbCharger.Connected;
+        }
+
+        public ChargeControl(IUsbCharger usbCharger, IDisplay display)
+        {
+            _usbCharger = usbCharger;
+            _usbCharger.CurrentValueEvent += ReadCurrentValue;
+            _display = display;
+        }
 
         public void startCharge()
         {
-            Console.WriteLine("Der lades nu");
+            if (IsConnected())
+            {
+                _usbCharger.StartCharge();
+            }
         }
 
         public void stopCharge()
         {
-            Console.WriteLine("Der lades ikke mere")
+            if (IsConnected())
+            {
+                _usbCharger.StopCharge();
+            }
         }
+
+        private void ReadCurrentValue(object sender, CurrentEventArgs e)
+        {
+            if (!IsConnected())
+            {
+                return;
+            }
+
+            if (e.Current > 5 && e.Current <= 500)
+            {
+                _display.ChargingMessage("Ladestrømmen er " + e.Current.ToString("0.00")+ "m")
+            }
+
+
+
+
+        }
+
+
+
     }
 }

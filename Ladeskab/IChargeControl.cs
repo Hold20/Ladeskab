@@ -5,8 +5,8 @@ using System.Text;
 namespace Ladeskab
 {
    public interface IChargeControl
-    {
-        public bool IsConnected { get; set; }
+   {
+       public bool IsConnected();
 
         public void startCharge();
 
