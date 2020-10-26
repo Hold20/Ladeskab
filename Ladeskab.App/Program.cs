@@ -1,6 +1,5 @@
 ﻿using System;
 using Ladeskab;
-using Ladeskab.UsbSimulator;
 
 namespace Ladeskab
 {
@@ -29,11 +28,11 @@ namespace Ladeskab
                         break;
 
                     case 'O':
-                        door.unlockedDoor();
+                        door.OnDoorOpen();
                         break;
 
                     case 'C':
-                        door.lockedDoor();
+                        door.OnDoorClose();
                         break;
 
                     case 'R':
@@ -41,7 +40,7 @@ namespace Ladeskab
                         string idString = System.Console.ReadLine();
 
                         int id = Convert.ToInt32(idString);
-                        rfidReader.RfidDetected(id);
+                        rfidReader.OnRfidRead(id);
                         break;
 
                     default:

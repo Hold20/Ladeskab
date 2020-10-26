@@ -6,9 +6,22 @@ namespace Ladeskab
 {
     public interface IDisplay
     {
-        public void ChargingMessage(string message);
 
         public void showPhoneConnected();
+
+        public void showConnectPhone();
+
+        public void showReadRfid();
+
+        public void showConnectionToPhoneFailed();
+
+        public void showRemovePhone();
+
+        public void showRfidMistake();
+
+        public void showDoorLocked();
+
+        public void showDoorUnlocked();
 
     }
 }

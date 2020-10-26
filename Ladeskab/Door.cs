@@ -8,18 +8,23 @@ namespace Ladeskab
 {
     public class Door: IDoor
     {
+
+        public bool DoorLocked{ get; set; }
+        private IDisplay _DisplayDoor;
+
         public void lockedDoor()
         {
             this.DoorLocked = true;
+            _DisplayDoor.showDoorLocked();
         }
 
         public void unlockedDoor()
         {
             this.DoorLocked = false;
+            _DisplayDoor.showDoorUnlocked();
+
         }
 
-        public bool DoorLocked 
-        { get; set; }
 
         public event EventHandler<doorCloseEventArgs> doorCloseEvent;
 
