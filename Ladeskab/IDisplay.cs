@@ -8,5 +8,7 @@ namespace Ladeskab
     {
         public void ChargingMessage(string message);
 
+        public void showPhoneConnected();
+
     }
 }
