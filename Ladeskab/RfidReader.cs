@@ -22,8 +22,6 @@ namespace Ladeskab
         {
             RfidEvent?.Invoke(this, e);
         }
-
-        public bool Rfid { get; set; }
     }
 
     public class RfidEventArgs : EventArgs
