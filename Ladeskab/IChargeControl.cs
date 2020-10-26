@@ -1,15 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ladeskab
+namespace UsbSimulator
 {
-   public interface IChargeControl
+    public class CurrentEventArgs : EventArgs
     {
-        public bool IsConnected { get; set; }
+        // Value in mA (milliAmpere)
+        public double Current { set; get; }
+    }
 
-        public void startCharge();
+    public interface IChargeControl
+    {
+        // Event triggered on new current value
+        event EventHandler<CurrentEventArgs> CurrentValueEvent;
 
-        public void stopCharge();
+        // Direct access to the current current value
+        double CurrentValue { get; }
+
+        // Require connection status of the phone
+        bool IsConnected { get; }
+
+        // Start charging
+        void StartCharge();
+        // Stop charging
+        void StopCharge();
     }
 }

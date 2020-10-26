@@ -18,5 +18,7 @@ namespace Ladeskab
 
         public void showRemovePhone();
 
+        public void showPhoneConnected();
+
     }
 }

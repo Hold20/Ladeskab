@@ -37,6 +37,11 @@ namespace Ladeskab
             Console.WriteLine("Fjern telefon");
         }
 
+        public void showPhoneConnected()
+        {
+            Console.WriteLine("Telefon er forbundet og lader");
+        }
+
 
     }
 }
