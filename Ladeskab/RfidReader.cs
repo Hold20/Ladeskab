@@ -6,12 +6,14 @@ namespace Ladeskab
 {
     public class RfidReader: IRfidReader
     {
+
+        public RfidReader()
+        { 
+        }
+
         public void RfidDetected(int id)
         {
-
-            string idString = System.Console.ReadLine();
-            int id = Convert.ToInt32(idString);  
-
+            RfidDetectedEvent(new RfidEventArgs(id))
         }
 
         public event EventHandler<RfidEventArgs> RfidEvent;
@@ -23,4 +25,16 @@ namespace Ladeskab
 
         public bool Rfid { get; set; }
     }
+
+    public class RfidEventArgs : EventArgs
+    {
+        public int Id { get; }
+
+        public RfidEventArgs(int id)
+        {
+            Id = id;
+        }
+
+    }
+
 }
