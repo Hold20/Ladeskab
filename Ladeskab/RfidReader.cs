@@ -13,7 +13,7 @@ namespace Ladeskab
 
         public void RfidDetected(int id)
         {
-            RfidDetectedEvent(new RfidEventArgs(id))
+            RfidDetectedEvent(new RfidEventArgs(id));
         }
 
         public event EventHandler<RfidEventArgs> RfidEvent;

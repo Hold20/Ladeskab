@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using UsbSimulator;
+using Ladeskab.UsbSimulator;
+
 
 namespace Ladeskab
 {
@@ -21,7 +22,7 @@ namespace Ladeskab
 
         // Her mangler flere member variable
         private LadeskabState _state;
-        private IChargeControl _charger;
+        private IUsbCharger _charger;
         private int _oldId;
         private IDoor _door;
         private IDisplay _display;
@@ -32,7 +33,7 @@ namespace Ladeskab
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
         // Her mangler constructor
-        public StationControl(IDoor door, IDisplay display, IRfidReader rfidReader, IChargeControl charger)
+        public StationControl(IDoor door, IDisplay display, IRfidReader rfidReader, IUsbCharger charger)
         {
             _display = display;
             _door = door;
@@ -76,11 +77,11 @@ namespace Ladeskab
             {
                 case LadeskabState.Available:
                     // Check for ladeforbindelse
-                    if (_charger.IsConnected)
+                    if (_charger.Connected)
                     {
                         _door.lockedDoor();
                         _charger.StartCharge();
-                        _oldId = id;
+                        _oldId = e.Id;
                         _display.showPhoneConnected();
 
                         
@@ -88,7 +89,7 @@ namespace Ladeskab
                     }
                     else
                     {
-                        _display.showConnectionToPhoneFailed
+                        _display.showConnectionToPhoneFailed();
                     }
 
                     break;
@@ -99,7 +100,7 @@ namespace Ladeskab
 
                 case LadeskabState.Locked:
                     // Check for correct ID
-                    if (id == _oldId)
+                    if (e.Id == _oldId)
                     {
                         _charger.StopCharge();
                         _door.unlockedDoor();
