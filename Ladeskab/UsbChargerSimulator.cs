@@ -1,26 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Ladeskab.UsbSimulator;
+using System.Timers;
 
-namespace Ladeskab
+namespace UsbSimulator
 {
-    public class ChargeControl: IChargeControl
+    public class UsbChargerSimulator : IUsbCharger
     {
-        private IUsbCharger _usbCharger;
-        private IDisplay _display;
-
-        public bool IsConnected()
-        {
-            return _usbCharger.Connected;
-        }
-
-        public ChargeControl(IUsbCharger usbCharger, IDisplay display)
-        {
-            _usbCharger = usbCharger;
-            _usbCharger.CurrentValueEvent += ReadCurrentValue;
-            _display = display;
-        }
+        // Constants
+        private const double MaxCurrent = 500.0; // mA
+        private const double FullyChargedCurrent = 2.5; // mA
+        private const double OverloadCurrent = 750; // mA
+        private const int ChargeTimeMinutes = 1; // minutes
+        private const int CurrentTickInterval = 250; // ms
 
         public event EventHandler<CurrentEventArgs> CurrentValueEvent;
 
@@ -33,7 +23,7 @@ namespace Ladeskab
         private System.Timers.Timer _timer;
         private int _ticksSinceStart;
 
-        public ChargeControl()
+        public UsbChargerSimulator()
         {
             CurrentValue = 0.0;
             Connected = true;
@@ -77,48 +67,49 @@ namespace Ladeskab
 
         public void SimulateOverload(bool overload)
         {
-        public void startCharge()
+            _overload = overload;
+        }
+
+        public void StartCharge()
         {
-            if (IsConnected())
+            // Ignore if already charging
+            if (!_charging)
             {
-                _usbCharger.StartCharge();
+                if (Connected && !_overload)
+                {
+                    CurrentValue = 500;
+                }
+                else if (Connected && _overload)
+                {
+                    CurrentValue = OverloadCurrent;
+                }
+                else if (!Connected)
+                {
+                    CurrentValue = 0.0;
+                }
+
+                OnNewCurrent();
+                _ticksSinceStart = 0;
+
+                _charging = true;
+
+                _timer.Start();
             }
         }
 
-        public void stopCharge()
+        public void StopCharge()
         {
-            if (IsConnected())
-            {
-                _usbCharger.StopCharge();
-            }
+            _timer.Stop();
+
+            CurrentValue = 0.0;
+            OnNewCurrent();
+
+            _charging = false;
         }
 
-        private void ReadCurrentValue(object sender, CurrentEventArgs e)
+        private void OnNewCurrent()
         {
-            if (!IsConnected())
-            {
-                return;
-            }
-
-            if (e.Current > 5 && e.Current <= 500)
-            {
-                _display.ChargingMessage("Ladestrømmen er " + e.Current.ToString("0.00") + "mA\r");
-                return;
-            }
-
-            if (e.Current > 0 && e.Current <= 5)
-            {
-                _display.ChargingMessage("Fuldt opladet telefon og ladning stoppet\r");
-                return;
-            }
-
-            if (e.Current > 500)
-            {
-                stopCharge();
-                _display.ChargingMessage("Ladning stoppet\r");
-            }
-
+            CurrentValueEvent?.Invoke(this, new CurrentEventArgs() {Current = this.CurrentValue});
         }
-
     }
 }
