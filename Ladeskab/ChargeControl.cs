@@ -47,15 +47,23 @@ namespace Ladeskab
 
             if (e.Current > 5 && e.Current <= 500)
             {
-                _display.ChargingMessage("Ladestrømmen er " + e.Current.ToString("0.00")+ "m")
+                _display.ChargingMessage("Ladestrømmen er " + e.Current.ToString("0.00") + "mA\r");
+                return;
             }
 
+            if (e.Current > 0 && e.Current <= 5)
+            {
+                _display.ChargingMessage("Fuldt opladet telefon og ladning stoppet\r");
+                return;
+            }
 
-
+            if (e.Current > 500)
+            {
+                stopCharge();
+                _display.ChargingMessage("Ladning stoppet\r");
+            }
 
         }
-
-
 
     }
 }
