@@ -1,19 +1,31 @@
+using Ladeskab.Boundary;
 using NUnit.Framework;
-using 
+using NSubstitute;
+using System;
+using System.Text;
+using System.IO;
 
 namespace Ladeskab.Unit.Test
 {
-    public class Tests
+    [TestFixture]
+    public class DisplayUnitTest
     {
+        private Display _uut;
+        StringWriter _result;
+
         [SetUp]
         public void Setup()
         {
+            _uut = new Display();
+            _result = new StringWriter();
+            Console.SetOut(_result);
         }
 
         [Test]
-        public void Test1()
+        public void DisplayMessage_Test()
         {
-            Assert.Pass();
+            _uut.DisplayMessage("Tester");
+            Assert.That(_result.ToString(), Is.EqualTo("Tester\r\n"));
         }
     }
 }
