@@ -48,21 +48,21 @@ namespace Ladeskab.Controller
 
             if (e.Current > 5 && e.Current <= 500)
             {
-                _display.ChargeMessage("Ladestrømmen er " + e.Current.ToString("0.00") + "mA\r");
+                _display.DisplayMessage("Ladestrømmen er " + e.Current.ToString("0.00") + "mA\r");
                 return;
             }
 
             if (e.Current > 0 && e.Current <= 5)
             {
                 StopCharge();
-                _display.ChargeMessage("Fuldt opladet telefon og ladning stoppet\r");
+                _display.DisplayMessage("Fuldt opladet telefon og ladning stoppet\r");
                 return;
             }
 
             if (e.Current > 500)
             {
                 StopCharge();
-                _display.ChargeMessage("Ladning stoppet\r");
+                _display.DisplayMessage("Ladning stoppet\r");
             }
 
         }
