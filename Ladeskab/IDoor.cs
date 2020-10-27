@@ -19,16 +19,19 @@ namespace Ladeskab
 
     public interface IDoor
     {
-        public void lockedDoor();
+        public void closeDoor();
 
-        public void unlockedDoor();
+        public void openDoor();
 
         public bool DoorLocked { get; }
+
+        public void LockedDoor();
+
+        public void UnlockedDoor();
 
         public event EventHandler<doorCloseEventArgs> doorCloseEvent;
 
         public event EventHandler<doorOpenEventArgs> doorOpenEvent;
 
-        
     }
 }

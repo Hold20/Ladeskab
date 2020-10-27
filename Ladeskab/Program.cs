@@ -11,8 +11,10 @@ namespace Ladeskab
             Door door = new Door();
             Display display = new Display();
             RfidReader rfidReader = new RfidReader();
-            UsbChargerSimulator charger = new UsbChargerSimulator();
+            UsbChargerSimulator usbCharger = new UsbChargerSimulator();
+            ChargeControl charger = new ChargeControl(usbCharger, display);
             StationControl station = new StationControl(door, display, rfidReader, charger);
+            
 
             bool finish = false;
             do
@@ -29,11 +31,11 @@ namespace Ladeskab
                         break;
 
                     case 'O':
-                        door.unlockedDoor();
+                        door.openDoor();
                         break;
 
                     case 'C':
-                        door.lockedDoor();
+                        door.closeDoor();
                         break;
 
                     case 'R':

@@ -8,8 +8,8 @@ namespace Ladeskab
    {
        public bool IsConnected();
 
-        public void startCharge();
+        public void StartCharge();
 
-        public void stopCharge();
+        public void StopCharge();
     }
 }

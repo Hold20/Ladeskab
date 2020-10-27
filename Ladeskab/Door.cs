@@ -10,19 +10,30 @@ namespace Ladeskab
     {
 
         public bool DoorLocked{ get; set; }
-        private IDisplay _DisplayDoor;
+        
 
-        public void lockedDoor()
+        public void openDoor()
         {
             this.DoorLocked = true;
-            _DisplayDoor.showDoorLocked();
+            Console.WriteLine("Døren er nu åben");
+            DoorOpened(new doorOpenEventArgs());
         }
 
-        public void unlockedDoor()
+        public void closeDoor()
         {
             this.DoorLocked = false;
-            _DisplayDoor.showDoorUnlocked();
+            Console.WriteLine("Døren er lukket");
+            DoorClosed(new doorCloseEventArgs());
+        }
 
+        public void LockedDoor()
+        {   
+            DoorLocked = true;
+        }
+
+        public void UnlockedDoor()
+        {
+            DoorLocked = false;
         }
 
 

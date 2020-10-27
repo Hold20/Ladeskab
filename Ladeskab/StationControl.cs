@@ -22,7 +22,7 @@ namespace Ladeskab
 
         // Her mangler flere member variable
         private LadeskabState _state;
-        private IUsbCharger _charger;
+        private IChargeControl _charger;
         private int _oldId;
         private IDoor _door;
         private IDisplay _display;
@@ -33,7 +33,7 @@ namespace Ladeskab
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
         // Her mangler constructor
-        public StationControl(IDoor door, IDisplay display, IRfidReader rfidReader, IUsbCharger charger)
+        public StationControl(IDoor door, IDisplay display, IRfidReader rfidReader, IChargeControl charger)
         {
             _display = display;
             _door = door;
@@ -77,9 +77,9 @@ namespace Ladeskab
             {
                 case LadeskabState.Available:
                     // Check for ladeforbindelse
-                    if (_charger.Connected)
+                    if (_charger.IsConnected())
                     {
-                        _door.lockedDoor();
+                        _door.LockedDoor();
                         _charger.StartCharge();
                         _oldId = e.Id;
                         _display.showPhoneConnected();
@@ -103,7 +103,7 @@ namespace Ladeskab
                     if (e.Id == _oldId)
                     {
                         _charger.StopCharge();
-                        _door.unlockedDoor();
+                        _door.UnlockedDoor();
                         _display.showRemovePhone();
 
                         
