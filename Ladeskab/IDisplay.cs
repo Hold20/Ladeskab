@@ -19,9 +19,7 @@ namespace Ladeskab
 
         public void showRfidMistake();
 
-        public void showDoorLocked();
-
-        public void showDoorUnlocked();
+        void ChargeMessage(string Message);
 
     }
 }

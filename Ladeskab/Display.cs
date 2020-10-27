@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 
@@ -19,7 +20,7 @@ namespace Ladeskab
 
         public void showReadRfid()
         {
-            Console.WriteLine("Indlæs RFID klammo");
+            Console.WriteLine("Tryk R for at indtaste kode og dermed låse");
         }
 
         public void showConnectionToPhoneFailed()
@@ -37,14 +38,10 @@ namespace Ladeskab
             Console.WriteLine("Ja, det virker så ikke. Prøv igen, taber");
         }
 
-        public void showDoorLocked()
+        public void ChargeMessage(string message)
         {
-            Console.WriteLine("Døren er låst. Så kan du jo prøve at se om du kan åbne den");
-        }
-
-        public void showDoorUnlocked()
-        {
-            Console.WriteLine("Nu er døren så låst op, prøv liiiiige at åbne den igen");
+            Console.WriteLine(message);
+            
         }
     }
 }
