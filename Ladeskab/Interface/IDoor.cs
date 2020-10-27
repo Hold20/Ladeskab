@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Text;
+using Ladeskab.Boundary;
 
-namespace Ladeskab
+namespace Ladeskab.Interface
 {
 
     public class doorOpenEventArgs : EventArgs

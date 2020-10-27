@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ladeskab.Boundary;
 
-namespace Ladeskab
+namespace Ladeskab.Interface
 {
    public interface IChargeControl
    {

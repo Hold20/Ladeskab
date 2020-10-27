@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Ladeskab.UsbSimulator;
+using Ladeskab.Interface;
+using Ladeskab.Boundary;
 
-namespace Ladeskab
+namespace Ladeskab.Controller
 {
     public class ChargeControl: IChargeControl
     {

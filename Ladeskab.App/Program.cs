@@ -1,6 +1,7 @@
 ﻿using System;
-using Ladeskab;
-using Ladeskab.UsbSimulator;
+using Ladeskab.Interface;
+using Ladeskab.Controller;
+using Ladeskab.Boundary;
 
 namespace Ladeskab
 {

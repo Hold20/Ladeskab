@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Ladeskab.UsbSimulator;
+using Ladeskab.Interface;
+using Ladeskab.Boundary;
 
 
-namespace Ladeskab
+namespace Ladeskab.Controller
 {
     public class StationControl
     {
