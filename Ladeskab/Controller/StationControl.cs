@@ -52,7 +52,7 @@ namespace Ladeskab.Controller
         {
             if(_state == LadeskabState.Available)
             {
-                _display.showConnectPhone();
+                _display.DisplayMessage("Forbind telefon");
 
                 _state = LadeskabState.DoorOpen;
             }
@@ -63,7 +63,7 @@ namespace Ladeskab.Controller
         {
             if(_state == LadeskabState.DoorOpen)
             {
-                _display.showReadRfid();
+                _display.DisplayMessage("Tryk R for at indtaste kode og dermed låse");
 
                 _state = LadeskabState.Available;
             }
@@ -83,14 +83,14 @@ namespace Ladeskab.Controller
                         _door.LockedDoor();
                         _charger.StartCharge();
                         _oldId = e.Id;
-                        _display.showPhoneConnected();
+                        _display.DisplayMessage("Telefonen er forbundet og du er grim");
 
                         
                         _state = LadeskabState.Locked;
                     }
                     else
                     {
-                        _display.showConnectionToPhoneFailed();
+                        _display.DisplayMessage("Der er ingen forbindelse til din telefon");
                     }
 
                     break;
@@ -105,14 +105,14 @@ namespace Ladeskab.Controller
                     {
                         _charger.StopCharge();
                         _door.UnlockedDoor();
-                        _display.showRemovePhone();
+                        _display.DisplayMessage("Fjern nu bare din telefon for helvede");
 
                         
                         _state = LadeskabState.Available;
                     }
                     else
                     {
-                        _display.showRfidMistake();
+                        _display.DisplayMessage("Ja, det virker så ikke. Prøv igen, taber");
                     }
 
                     break;
