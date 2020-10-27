@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using Ladeskab.Interface;
 
-namespace Ladeskab
+namespace Ladeskab.Boundary
 {
     public class Door: IDoor
     {

@@ -1,6 +1,7 @@
 ﻿using System;
+using Ladeskab.Boundary;
 
-namespace Ladeskab.UsbSimulator
+namespace Ladeskab.Interface
 {
     public class CurrentEventArgs : EventArgs
     {
