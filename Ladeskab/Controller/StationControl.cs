@@ -14,17 +14,16 @@ namespace Ladeskab.Controller
     public class StationControl
     {
         // Enum med tilstande ("states") svarende til tilstandsdiagrammet for klassen
-        private enum LadeskabState
+        public enum LadeskabState
         {
             Available,
             Locked,
             DoorOpen
         };
 
-        // Her mangler flere member variable
-        private LadeskabState _state;
+        public LadeskabState _state;
         private IChargeControl _charger;
-        private int _oldId;
+        public int _oldId;
         private IDoor _door;
         private IDisplay _display;
         private IRfidReader _rfidReader;
@@ -33,7 +32,6 @@ namespace Ladeskab.Controller
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
-        // Her mangler constructor
         public StationControl(IDoor door, IDisplay display, IRfidReader rfidReader, IChargeControl charger)
         {
             _display = display;
