@@ -158,9 +158,5 @@ namespace Ladeskab.Unit.Test
             _subUsbCharger.DidNotReceive().StopCharge();
         }
 
-
-
-
-
     }
 }
